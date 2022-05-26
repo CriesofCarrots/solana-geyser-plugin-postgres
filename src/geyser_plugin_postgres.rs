@@ -371,6 +371,7 @@ impl GeyserPlugin for GeyserPluginPostgres {
                     }
                 }
                 ReplicaTransactionInfoVersions::V0_0_2(transaction_info) => {
+                    info!("v0_0_2 index {:?}", transaction_info.index);
                     if let Some(transaction_selector) = &self.transaction_selector {
                         if !transaction_selector.is_transaction_selected(
                             transaction_info.is_vote,
