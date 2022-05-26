@@ -61,7 +61,9 @@ Create TYPE "TransactionErrorCode" AS ENUM (
     'InvalidRentPayingAccount',
     'WouldExceedMaxVoteCostLimit',
     'WouldExceedAccountDataBlockLimit',
-    'WouldExceedAccountDataTotalLimit'    
+    'WouldExceedAccountDataTotalLimit',
+    'DuplicateInstruction',
+    'InsufficientFundsForRent'
 );
 
 CREATE TYPE "TransactionError" AS (
@@ -154,6 +156,7 @@ CREATE TYPE "LoadedMessageV0" AS (
 -- The table storing transactions
 CREATE TABLE transaction (
     slot BIGINT NOT NULL,
+    index BIGINT NOT NULL,
     signature BYTEA NOT NULL,
     is_vote BOOL NOT NULL,
     message_type SMALLINT, -- 0: legacy, 1: v0 message
