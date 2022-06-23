@@ -269,6 +269,7 @@ impl GeyserPlugin for GeyserPluginPostgres {
                     }
                 }
             }
+            ReplicaAccountInfoVersions::V0_0_2(_) => unimplemented!(),
         }
 
         measure_all.stop();

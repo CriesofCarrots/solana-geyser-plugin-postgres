@@ -10,7 +10,7 @@ use {
     postgres::{Client, Statement},
     postgres_types::{FromSql, ToSql},
     solana_geyser_plugin_interface::geyser_plugin_interface::{
-        GeyserPluginError, ReplicaTransactionInfo, ReplicaTransactionInfoWithIndex,
+        GeyserPluginError, ReplicaTransactionInfo, ReplicaTransactionInfoV2,
     },
     solana_runtime::bank::RewardType,
     solana_sdk::{
@@ -526,7 +526,7 @@ fn build_db_transaction(
 
 fn build_db_transaction_v2(
     slot: u64,
-    transaction_info: &ReplicaTransactionInfoWithIndex,
+    transaction_info: &ReplicaTransactionInfoV2,
     transaction_write_version: u64,
 ) -> DbTransaction {
     DbTransaction {
@@ -655,7 +655,7 @@ impl ParallelPostgresClient {
 
     fn build_transaction_request_v2(
         slot: u64,
-        transaction_info: &ReplicaTransactionInfoWithIndex,
+        transaction_info: &ReplicaTransactionInfoV2,
         transaction_write_version: u64,
     ) -> LogTransactionRequest {
         LogTransactionRequest {
@@ -690,7 +690,7 @@ impl ParallelPostgresClient {
 
     pub fn log_transaction_info_v2(
         &mut self,
-        transaction_info: &ReplicaTransactionInfoWithIndex,
+        transaction_info: &ReplicaTransactionInfoV2,
         slot: u64,
     ) -> Result<(), GeyserPluginError> {
         self.transaction_write_version
